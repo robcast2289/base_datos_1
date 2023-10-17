@@ -1,0 +1,10 @@
+<h1>Home </h1>
+
+{% for lib in libros %}
+
+<h2>{{ lib.titulo }}</h2>
+<p>{{ lib.autor }}</p>
+<img src="{{ lib.imagen.url }}" alt="{{ lib.titulo }}">
+{{ lib.imagen.url }}
+
+{% endfor %}
