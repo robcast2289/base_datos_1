@@ -11,7 +11,7 @@
                         <p class="card-text">Autor: {{ lib.autor }}</p>
                     </div>
                     <div class="card-footer">
-                        <a href={% url 'libro' %} class="btn btn-primary">Prestar libro</a>
+                        <a href={% url 'libro' lib.id %} class="btn btn-primary">Prestar libro</a>
                     </div>
                 </div>
             </div>

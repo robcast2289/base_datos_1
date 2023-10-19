@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from library.models import Libro
 from django.contrib.auth.decorators import  login_required
 from django.contrib.auth import logout
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
+from .models import Libro
 
 # Create your views here.
 
@@ -12,8 +13,9 @@ def home(request):
     return render(request,'index.html',{'libros':libros})
 
 @login_required
-def libro(request):
-    return render(request,'libro.html')
+def libro(request,book_id):
+    libro = get_object_or_404(Libro,pk=book_id)
+    return render(request,'libro.html',{'book':libro})
 
 
 def register(request):

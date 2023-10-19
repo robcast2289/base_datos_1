@@ -19,9 +19,7 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href={% url 'home' %}>Home</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href={% url 'libro' %}>Libro</a>
-                  </li>
+
                   {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href={% url 'logout' %}>Salir</a>
@@ -36,6 +34,11 @@
                   {% endif %}
                 </ul>
               </div>
+              {% if request.user.is_authenticated %}
+              <div class="d-flex">
+                <strong>{{request.user.username}}</strong>
+              </div>
+              {% endif %}
             </div>
           </nav>
 
