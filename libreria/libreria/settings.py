@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'library',
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,6 +86,7 @@ DATABASES = {
 
         'ENGINE':'django.db.backends.oracle',
         'NAME': '192.168.0.21:1521/xe',
+        #'NAME': '192.168.2.3:1521/xe',
         'USER': 'LIBRERIA',
         'PASSWORD': '123',
         'TEST':{
@@ -136,3 +142,8 @@ MEDIA_URL = '/public/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# VARIABLES DE REDIRECCION DE LOGIN Y LOGOUT
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'

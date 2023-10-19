@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+          <div class="row">
+            {% for lib in libros %}
+            <div class="col-4" style="margin-top: 60px;">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ lib.imagen.url }}" class="card-img-top" alt="{{ lib.titulo }}" style="width: 100%; height: 400px;;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ lib.titulo }}</h5>
+                        <p class="card-text">Autor: {{ lib.autor }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href={% url 'libro' %} class="btn btn-primary">Prestar libro</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+          </div>
+{% endblock %}
+

@@ -1,6 +1,8 @@
 asgiref==3.7.2
+crispy-bootstrap5==0.7
 cx-Oracle==8.3.0
 Django==4.2.6
+django-crispy-forms==2.1
+pillow==10.1.0
 sqlparse==0.4.4
 typing_extensions==4.8.0
-pillow==10.1.0

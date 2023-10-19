@@ -16,6 +16,9 @@ class Usuario(models.Model):
     phone = models.CharField(max_length=8)
     tipo = models.ForeignKey(TipoUsuario,null=False,blank=False,on_delete=models.RESTRICT)
 
+    class Meta:
+        db_table_comment = "Complemento usuario"
+
 class Autor(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50)
