@@ -49,6 +49,10 @@ class Libro(models.Model):
     ejemplares = models.PositiveIntegerField()
     imagen = models.ImageField(upload_to='library/images',null=True)
 
+    def __str__(self) -> str:
+        txt = "{0}"
+        return txt.format(self.titulo)
+
 
 class Pretamo(models.Model):
     id = models.AutoField(primary_key=True)

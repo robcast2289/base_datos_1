@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<!-- {% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %} -->
+
+<h1>Libros actualmente prestados</h1>
+
+
+<div class="row">
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">libro</th>
+            <th scope="col">Fecha prestamo</th>
+            <th scope="col">Fecha devolucion</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for pres in prestamos %}
+          <tr>
+            <th scope="row">{{ pres.id }}</th>
+            <td>{{ pres.libro }}</td>
+            <td>{{ pres.fecha_prestamo }}</td>
+            <td>{{ pres.fecha_devolucion }}</td>
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+
+</div>
+
+{% endblock %}

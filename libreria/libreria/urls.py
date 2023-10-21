@@ -23,8 +23,9 @@ from library import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home, name='home'),
     path('libro/<int:book_id>',views.libro, name='libro'),
+    path('prestamo/',views.prestamo, name='prestamo'),
     path('register/',views.register, name='register'),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('',views.home, name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

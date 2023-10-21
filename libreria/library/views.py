@@ -47,6 +47,14 @@ def libro(request,book_id):
 
     return render(request,'libro.html',data)
 
+@login_required
+def prestamo(request):
+    prestamo = Pretamo.objects.filter(user=request.user)
+    data = {
+        'prestamos':prestamo,
+    }
+    return render(request,'prestamo.html',data)
+
 
 def register(request):
     data = {
