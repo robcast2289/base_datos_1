@@ -1,21 +1,51 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from library.models import Libro
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import  login_required
-from django.contrib.auth import logout
-from .forms import CustomUserCreationForm
-from django.contrib.auth import authenticate, login
-from .models import Libro
+from .forms import CustomUserCreationForm, PrestamoForm
+from .models import Libro, Pretamo
 
 # Create your views here.
 
 def home(request):
-    libros = Libro.objects.all()
+    print("usuario")
+    print(request.user.id)
+    if not request.user.id is None:
+        libros = Libro.objects.extra(where=[f"""
+        NOT EXISTS (select 1 from library_pretamo where library_pretamo.libro_id = library_libro.id and library_pretamo.user_id = {request.user.id} and library_pretamo.fecha_devolucion_real is null)
+        """])
+    else:
+        libros = Libro.objects.all()
     return render(request,'index.html',{'libros':libros})
 
 @login_required
 def libro(request,book_id):
     libro = get_object_or_404(Libro,pk=book_id)
-    return render(request,'libro.html',{'book':libro})
+    data = {
+        'book':libro,
+        'form':PrestamoForm
+    }
+    print(request.user.username)
+    if request.method == 'POST':
+        print("isPost")
+        prestamo_form = PrestamoForm(data=request.POST)
+
+        if prestamo_form.is_valid():
+            print("isValid")
+            libro = Libro.objects.get(pk=book_id)
+
+            if libro.ejemplares > 0:
+                prestamo_form.save(request.user,libro)
+
+                libro.ejemplares = libro.ejemplares - 1
+                libro.save()
+
+                return redirect('home')
+            else:
+                messages.error(request,"No hay libros disponiples para prestar")
+
+    return render(request,'libro.html',data)
 
 
 def register(request):

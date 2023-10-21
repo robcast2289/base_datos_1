@@ -26,6 +26,9 @@ class Autor(models.Model):
     def __str__(self) -> str:
         txt = "{0}"
         return txt.format(self.nombre)
+    
+    class Meta:
+        verbose_name_plural = "Autores"
 
 class Editorial(models.Model):
     id = models.AutoField(primary_key=True)
@@ -34,6 +37,9 @@ class Editorial(models.Model):
     def __str__(self) -> str:
         txt = "{0}"
         return txt.format(self.nombre)
+    
+    class Meta:
+        verbose_name_plural = "Editoriales"
 
 class Libro(models.Model):
     id = models.AutoField(primary_key=True)
@@ -42,3 +48,15 @@ class Libro(models.Model):
     editorial = models.ForeignKey(Editorial,null=True,blank=True,on_delete=models.CASCADE)
     ejemplares = models.PositiveIntegerField()
     imagen = models.ImageField(upload_to='library/images',null=True)
+
+
+class Pretamo(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User,null=False,blank=False,on_delete=models.RESTRICT)
+    libro = models.ForeignKey(Libro,null=False,blank=False,on_delete=models.RESTRICT)
+    fecha_prestamo = models.DateTimeField(blank=False)
+    fecha_devolucion = models.DateTimeField(blank=False)
+    fecha_devolucion_real = models.DateTimeField(null=True,blank=True)
+
+    class Meta:
+        verbose_name = "Prestamo"
