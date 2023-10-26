@@ -85,7 +85,7 @@ DATABASES = {
         #'NAME': BASE_DIR / 'db.sqlite3',
 
         'ENGINE':'django.db.backends.oracle',
-        'NAME': '192.168.0.21:1521/xe',
+        'NAME': '192.168.0.17:1521/xe',
         #'NAME': '192.168.2.3:1521/xe',
         'USER': 'LIBRERIA',
         'PASSWORD': '123',

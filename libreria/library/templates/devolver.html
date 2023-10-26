@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<h1>Libro {{ book.id }}</h1>
+
+<div class="row">
+
+    <div class="col-6 mx-auto" style="margin-top: 60px;">
+        <div class="card" style="width: 18rem;">
+            <img src="{{ book.imagen.url }}" class="card-img-top" alt="{{ book.titulo }}" style="width: 100%; height: 400px;;">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.titulo }}</h5>
+                <p class="card-text">Autor: {{ book.autor }}</p>
+                <br>
+                <p class="card-text"><strong>Fecha de prestamo:</strong> {{ prestamo.fecha_prestamo }}</p>
+                <p class="card-text"><strong>Fecha de devolucion prevista:</strong> {{ prestamo.fecha_devolucion }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 mx-auto" style="margin-top: 60px;">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="card" style="width: 30rem;">
+                <div class="card-body">
+                <h5 class="card-title">Confirmar datos: </h5>
+                {{ form | crispy }}
+                <button class="btn btn-sm btn-primary float-end" type="submit">Devolver libro</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

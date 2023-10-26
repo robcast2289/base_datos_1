@@ -51,3 +51,12 @@ class PrestamoForm(forms.ModelForm):
         prestamo.save()
 
         return prestamo
+    
+
+class DevolverForm(forms.ModelForm):
+    fecha_devolucion_real = forms.DateTimeField(initial=datetimeNow.today().strftime('%Y-%m-%dT00:00'),widget=forms.DateTimeInput(attrs={'type':'datetime-local'}),disabled=True)
+    #fecha_devolucion_real = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type':'datetime-local','min':datetimeNow.now().date()}))
+
+    class Meta:
+        model = Pretamo
+        fields = ['fecha_devolucion_real']

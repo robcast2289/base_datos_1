@@ -22,9 +22,11 @@ from django.conf.urls.static import static
 from library import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('libro/<int:book_id>',views.libro, name='libro'),
+    path('devolver/<int:prestamo_id>',views.devolver, name='devolver'),
     path('prestamo/',views.prestamo, name='prestamo'),
+    path('historial/',views.historial, name='historial'),
     path('register/',views.register, name='register'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('',views.home, name='home'),
